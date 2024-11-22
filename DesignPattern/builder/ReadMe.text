@@ -1,0 +1,10 @@
+builder design pattern we use where  we have multiupule properties ,
+but all the properties are optional .  not required ,
+
+so instead of creating one big constructor or  multipule argument constructor ,
+
+We create a class using chaining and initilize the requred properties . and in the last we will call the build method .
+common example is @Builder of lombook annotation
+
+
+we can use builder design pattern to build complax objects
