@@ -1,0 +1,15 @@
+chain of responsibility is used where we need to  perform different action on a request.
+Like sending notifciation , first on email , then phone , whats , any other .
+
+like we need to validate some thing
+like on login first check email is exist ,
+email and password are valid
+user is present
+user roles
+validation on roles .
+
+
+best wat to implement this ,
+create a interface fist  for the action you want to do .
+create abstract class this will expose two methods link , and check methof .
+link method can  store all handles and handler will implement this abstract class
