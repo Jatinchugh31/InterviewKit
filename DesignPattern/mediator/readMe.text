@@ -1,0 +1,4 @@
+mediator design pattern is user to interact between different application using a mediator clas.
+
+both the class with not communicate directly and form loose coupling .
+the basic example  of this is  air traffic controller
