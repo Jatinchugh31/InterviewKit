@@ -1,0 +1,28 @@
+What is a HashMap?
+A HashMap<K, V> stores key-value pairs, allowing constant-time (O(1)) access in most cases.
+It is not synchronized (not thread-safe).
+Allows one null key and multiple null values.
+It does not maintain insertion order (Unlike LinkedHashMap).
+
+
+ Internal Working of HashMap
+How does HashMap store key-value pairs?
+Uses an array of Node<K, V> objects (buckets).
+Computes a hash code to determine the index for storing the key-value pair.
+Uses chaining (Linked List) or Red-Black Tree to handle collisions.
+
+Load Factor and Resizing
+Default initial capacity = 16
+Default load factor = 0.75
+Resizing occurs when size > (capacity × load factor).
+Doubles capacity and recalculates indices.
+
+
+
+
+
+Feature	     |HashMap     | 	LinkedHashMap      	  TreeMap
+Ordering	 |No order	  |Maintains insertion order |	Sorted (Ascending)
+Null Keys	 |Allowed	  |Allowed	                 | ❌ Not allowed
+Performance	 |O(1)	       |O(1)	                 |O(log n)
+Usage	     |Fast lookups |Ordered access	         |       Sorted keys

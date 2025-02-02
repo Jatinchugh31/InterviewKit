@@ -1,0 +1,201 @@
+
+
+An abstract class in Java is a class that cannot be instantiated and is meant to be inherited by other classes.
+It is used to define a common base with shared behavior while enforcing that certain methods must be implemented by subclasses.
+
+Cannot be instantiated directly.
+Can have both abstract (unimplemented) and concrete (implemented) methods.
+Supports constructors, but they can only be called via subclass constructors.
+Can have fields and methods with any access modifier (private, protected, public).
+Can have static methods and final methods.
+Can implement interfaces but cannot extend multiple classes.
+
+
+When to Use an Abstract Class?
+When you want to provide some common implementation for multiple subclasses.
+When you need to define a contract (via abstract methods) but also provide some functionality.
+When the concept being modeled has an "is-a" relationship (e.g., Animal is an abstract concept that Dog and Cat inherit from)
+
+
+
+Abstract Class in Java
+An abstract class in Java is a class that cannot be instantiated and is meant to be inherited by other classes. It is used to define a common base with shared behavior while enforcing that certain methods must be implemented by subclasses.
+
+Key Features of Abstract Class
+Cannot be instantiated directly.
+Can have both abstract (unimplemented) and concrete (implemented) methods.
+Supports constructors, but they can only be called via subclass constructors.
+Can have fields and methods with any access modifier (private, protected, public).
+Can have static methods and final methods.
+Can implement interfaces but cannot extend multiple classes.
+Abstract Class Syntax
+java
+Copy
+Edit
+abstract class Animal {  // Abstract class
+    abstract void makeSound();  // Abstract method (no implementation)
+
+    void eat() {  // Concrete method (has implementation)
+        System.out.println("Animal is eating...");
+    }
+}
+Example: Abstract Class Usage
+java
+Copy
+Edit
+abstract class Animal {
+    abstract void makeSound();  // Abstract method (must be overridden in subclasses)
+
+    void eat() {  // Concrete method (can be inherited)
+        System.out.println("Animal is eating...");
+    }
+}
+
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    void makeSound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.makeSound();  // Output: Dog barks
+        myDog.eat();        // Output: Animal is eating...
+
+        Animal myCat = new Cat();
+        myCat.makeSound();  // Output: Cat meows
+    }
+}
+Explanation:
+Animal is an abstract class with an abstract method makeSound().
+Dog and Cat inherit from Animal and provide their own implementation for makeSound().
+We cannot create an instance of Animal directly, but we can use it as a reference.
+Abstract Class vs. Interface
+Feature	Abstract Class	Interface
+Multiple Inheritance	Not supported	Supported (A class can implement multiple interfaces)
+Constructors	Can have constructors	Cannot have constructors
+Access Modifiers	Can have public, protected, private methods	Methods are public by default (before Java 9)
+Method Implementation	Can have both abstract and concrete methods	Only abstract methods (until Java 8), default and static methods after Java 8
+Fields (Variables)	Can have instance variables	Can have only public static final constants
+
+When to Use an Abstract Class?
+When you want to provide some common implementation for multiple subclasses.
+When you need to define a contract (via abstract methods) but also provide some functionality.
+When the concept being modeled has an "is-a" relationship (e.g., Animal is an abstract concept that Dog and Cat inherit from).
+Common Mistakes & Best Practices
+
+
+✅ Best Practices:
+Use an abstract class when you have shared behavior among subclasses.
+Keep abstract classes focused on a single responsibility.
+Use interfaces when you need multiple inheritance or pure abstraction.
+❌ Common Mistakes:
+Trying to instantiate an abstract class directly (new AbstractClass()) → ❌ Compile-time error
+Forgetting to implement all abstract methods in a subclass → ❌ Compile-time error
+Overusing abstract classes when an interface would be better
+
+
+=====================================
+
+ interface in Java is a blueprint of a class that contains only abstract methods (before Java 8)
+ and default/static methods (since Java 8). It is primarily used to achieve abstraction and multiple inheritance.
+
+
+ Cannot have instance variables (only public static final constants).
+ Cannot have constructors (since it cannot be instantiated).
+ All methods are implicitly public abstract (before Java 8).
+ Since Java 8, it can have default and static methods.
+ Supports multiple inheritance (a class can implement multiple interfaces).
+ private method after java 9
+
+
+ Interfaces with Multiple Inheritance
+ One of the main advantages of interfaces in Java is multiple inheritance, which is not possible with classes.
+
+ interface Vehicle {
+     void start();
+
+     // Default method (introduced in Java 8)
+     default void stop() {
+         System.out.println("Vehicle is stopping");
+     }
+
+     // Static method (introduced in Java 8)
+     static void service() {
+         System.out.println("Vehicle is being serviced");
+     }
+ }
+
+ class Car implements Vehicle {
+     public void start() {
+         System.out.println("Car is starting");
+     }
+ }
+
+ public class Main {
+     public static void main(String[] args) {
+         Car car = new Car();
+         car.start();  // Output: Car is starting
+         car.stop();   // Output: Vehicle is stopping
+
+         Vehicle.service();  // Output: Vehicle is being serviced
+     }
+ }
+
+
+
+===
+
+Before Java 8, interfaces in Java could only contain abstract methods (without implementation). With Java 8, interfaces introduced:
+
+Default Methods: Methods with implementation that can be inherited by implementing classes.
+Static Methods: Methods belonging to the interface itself, not inherited by implementing classes.
+
+
+How Default Methods Work
+A default method is inherited by implementing classes.
+If multiple interfaces provide a conflicting default method, the class must override the method.
+
+
+ Multiple Interfaces with Default Methods (Conflict Resolution)
+If a class implements two interfaces that define the same default method, Java does not know which one to choose, so the class must override the method
+
+
+interface Vehicle {
+    default void start() {
+        System.out.println("Vehicle is starting");
+    }
+}
+
+interface Machine {
+    default void start() {
+        System.out.println("Machine is starting");
+    }
+}
+
+class Car implements Vehicle, Machine {
+    @Override
+    public void start() {
+        System.out.println("Car is starting"); // Must override to resolve conflict
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.start(); // Output: Car is starting
+    }
+}
+
+
+Static Methods in Interfaces
+Static methods belong to the interface itself and cannot be overridden.
+They are not inherited by implementing classes.
+Must be called using InterfaceName.methodName().
