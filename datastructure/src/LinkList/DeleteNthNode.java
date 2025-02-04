@@ -1,6 +1,7 @@
 package datastructure.src.LinkList;
 
-import static LinkList.ReverseALinkList.print;
+
+import static datastructure.src.LinkList.ReverseALinkList.print;
 
 public class DeleteNthNode {
   public static void main(String[] args) {

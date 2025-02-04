@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class findSubArraylistSum0 {
 
     public static void main(String[] args) {
-        int[] n = {4, 2, -3, 1, 6};
+        int[] n = {4, 2, -3, 1, 6,-6};
 
         findSubarraySumBF(n);
         findSubarraySumMap(n);
