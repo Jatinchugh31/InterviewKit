@@ -1,0 +1,33 @@
+ThreadLocal is used as personal space of each thread.
+
+each thread has it own space ,
+
+
+
+// KEEP IN MIND
+don't use thradLocal in ThreadPool direclty ,
+
+as threadPool will re-use the existing thread . so that old thread can use the oldThreadPool information for new task
+so in this we need to keep in mind that we are calling
+@AFTERExecte
+@PreExecture in thread pool
+so that we can clear the ThreadLocal or initilise the new values;
+
+
+public class ThreadLocalWithUserContext implements Runnable {
+
+    private static ThreadLocal<Context> userContext
+      = new ThreadLocal<>();
+    private Integer userId;
+    private UserRepository userRepository = new UserRepository();
+
+    @Override
+    public void run() {
+        String userName = userRepository.getUserNameForUserId(userId);
+        userContext.set(new Context(userName));
+        System.out.println("thread context for given userId: "
+          + userId + " is: " + userContext.get());
+    }
+
+    // standard constructor
+}
