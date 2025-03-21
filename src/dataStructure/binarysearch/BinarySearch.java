@@ -1,4 +1,4 @@
-package src.dataStructure.DivideAndConcure;
+package src.dataStructure.binarysearch;
 
 public class BinarySearch {
 
@@ -21,5 +21,7 @@ public class BinarySearch {
             }
         }
     }
+
+
 
 }
