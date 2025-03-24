@@ -9,8 +9,7 @@
    Signature (for verification)
    The structure looks like this:
 
-css
-Copy
+
 Edit
 header.payload.signature
 Where:
