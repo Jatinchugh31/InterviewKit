@@ -3,7 +3,7 @@ package src.dataStructure.string;
 public class LongestCommonSubsequence {
 
     public static void main(String[] args) {
-        String text1 = "abcde", text2 = "ace";
+        String text1 = "abcde", text2 = "acf";
         //Output: 3
         //Explanation: The longest common subsequence is "ace" and its length is 3.
         toDApproch(text1 ,text2);

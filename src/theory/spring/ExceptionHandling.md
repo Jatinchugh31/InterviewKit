@@ -1,4 +1,6 @@
-Global exception handling allows you to manage exceptions at a global level, meaning you can define how all exceptions should be handled throughout the application. This can be done using the @ControllerAdvice annotation in combination with @ExceptionHandler.
+Global exception handling allows you to manage exceptions at a global level, meaning you can define how all exceptions
+should be handled throughout the application. This can be done using the @ControllerAdvice annotation in combination
+with @ExceptionHandler.
 
 Steps for Global Exception Handling
 Create a Custom Exception Class (optional): Define custom exceptions that your application may throw.
@@ -9,8 +11,8 @@ super(message);
 }
 }
 
-
-Create an Exception Handler Using @ControllerAdvice: You can define a global exception handler that will catch exceptions thrown across all controllers in the application.
+Create an Exception Handler Using @ControllerAdvice: You can define a global exception handler that will catch
+exceptions thrown across all controllers in the application.
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +34,15 @@ public class GlobalExceptionHandler {
     }
 
     // You can also handle other exceptions here as needed
+
 }
 
-@ControllerAdvice: This annotation marks the class as an exception handler that applies to all controllers in the Spring application.
-@ExceptionHandler: This annotation is used to specify which exception the method should handle. In this case, ResourceNotFoundException and Exception.
-Customize the Response: You can return more detailed error information (e.g., a custom error object) in the ResponseEntity to provide better responses to the client.
+@ControllerAdvice: This annotation marks the class as an exception handler that applies to all controllers in the Spring
+application.
+@ExceptionHandler: This annotation is used to specify which exception the method should handle. In this case,
+ResourceNotFoundException and Exception.
+Customize the Response: You can return more detailed error information (e.g., a custom error object) in the
+ResponseEntity to provide better responses to the client.
 
 Example:
 public class ErrorResponse {
@@ -49,6 +55,7 @@ private long timestamp;
     }
 
     // Getters and setters
+
 }
 
 @ExceptionHandler(ResourceNotFoundException.class)
@@ -57,10 +64,8 @@ ErrorResponse error = new ErrorResponse(ex.getMessage(), System.currentTimeMilli
 return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 }
 
-
-
-
-Handling Validation Errors (e.g., using @Valid): For validation errors that occur in your request bodies (e.g., @RequestBody), Spring has built-in support for handling constraint violations.
+Handling Validation Errors (e.g., using @Valid): For validation errors that occur in your request bodies (e.g.,
+@RequestBody), Spring has built-in support for handling constraint violations.
 
 @RestController
 public class MyController {
@@ -79,4 +84,9 @@ public class MyController {
             .collect(Collectors.toList());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 }
+
+
+// we can have multipule @controllerAdvice , spring will maintain this but spring dosent maintain the orde rso  we can use @Order  to tell spring 
+give this this preference to this one 
