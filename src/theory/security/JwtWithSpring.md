@@ -4,6 +4,7 @@
    It is self-contained, meaning it includes all the necessary information about the user (claims) and does not require
    server-side session storage.
    It typically has three parts, separated by dots (.):
+  
    Header (algorithm & token type)
    Payload (claims)
    Signature (for verification)

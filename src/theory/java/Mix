@@ -1,0 +1,6 @@
+we know the comman difference between stringBuffer and String builder.
+as buffer is thread safe where builder is not
+so it can impact the performance .
+
+but can you tell any real time use case where we can use StringBuffer or where we can use StringBuilder .
+one example is tranction bank, as in this we need to maintain consitnscy so it should be thread safe , only one can update at a time

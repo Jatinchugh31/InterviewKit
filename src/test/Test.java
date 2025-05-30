@@ -1,27 +1,54 @@
 package src.test;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 public class Test {
+
+
     public static void main(String[] args) {
-         String str1 = "A man, a plan, a canal: Panama";
-         str1 = str1.replaceAll("[^a-zA-Z]", "").toLowerCase().trim();
-        int start =0;
-        int end =str1.length()-1;
-        while (start < end) {
-            if(str1.charAt(start) != str1.charAt(end)) {
-                System.out.println(false);
-                return;
+       int arr[] ={2,4,6,7,1,1,1,1,1,1};
+       int target = 6;
+
+       // way1   sliding window
+        int low=0;
+        int high = 0;
+        int sum=0;
+        int result=0;
+        while(high < arr.length){
+            sum = sum + arr[high];
+
+            while(sum > target && low < high){
+                sum = sum - arr[low];
+                low++;
             }
-            start++;
-            end--;
+            if(sum == target){
+                result = Math.max(result,high-low+1);
+                System.out.println("pair found"+result);
+            }
+            high++;
         }
 
-        System.out.println(true);
+        Map<Integer,Integer>  prefixSum =new HashMap<>();
+          sum=0;
+          result=0;
+        for(int i=0;i<arr.length;i++){
+              sum = sum + arr[i];
+              if(sum == target){
+                  result = Math.max(result,i+1);
+              }
+
+              if(prefixSum.containsKey(sum-target)){
+                  result = Math.max(result,i - prefixSum.get(sum-target));
+
+              }
+              prefixSum.put(sum,i);
+        }
+        System.out.println(result);
     }
+
+
 
 
 }

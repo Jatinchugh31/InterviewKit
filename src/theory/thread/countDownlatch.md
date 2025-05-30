@@ -1,24 +1,31 @@
 Sure! Let's break it down in simpler terms.
 
-A **countdown latch** is like a "wait for me" signal for threads. Imagine you have several workers (threads) doing tasks, and the main thread (like a boss) needs to wait for them to finish before continuing its own work.
+A **countdown latch** is like a "wait for me" signal for threads. Imagine you have several workers (threads) doing
+tasks, and the main thread (like a boss) needs to wait for them to finish before continuing its own work.
 
 ### How does it work?
 
-1. **Setting the Latch**: You start with a **count** (let's say 5) when you create the latch. This count represents how many workers you’re waiting for. For example, if you have 5 workers, you set the latch with 5.
+1. **Setting the Latch**: You start with a **count** (let's say 5) when you create the latch. This count represents how
+   many workers you’re waiting for. For example, if you have 5 workers, you set the latch with 5.
 
-2. **Workers Do Their Jobs**: Each worker (thread) does its job, and once it finishes, it signals that it’s done by calling `countDown()` on the latch. This decreases the count by 1.
+2. **Workers Do Their Jobs**: Each worker (thread) does its job, and once it finishes, it signals that it’s done by
+   calling `countDown()` on the latch. This decreases the count by 1.
 
-3. **Main Thread Waits**: The main thread (the boss) calls `await()`. This means the main thread says, “I’ll wait here until the count reaches zero.”
+3. **Main Thread Waits**: The main thread (the boss) calls `await()`. This means the main thread says, “I’ll wait here
+   until the count reaches zero.”
 
-4. **When Count Reaches Zero**: Once all the workers finish their tasks and the latch count reaches zero, the main thread gets the signal to move forward and continue its own job.
+4. **When Count Reaches Zero**: Once all the workers finish their tasks and the latch count reaches zero, the main
+   thread gets the signal to move forward and continue its own job.
 
 ### Simple Example
 
-Imagine you are organizing a party with 5 helpers. You give each helper a task to complete (like blowing up balloons, setting up the music, etc.). The party can’t start until all helpers are done with their tasks.
+Imagine you are organizing a party with 5 helpers. You give each helper a task to complete (like blowing up balloons,
+setting up the music, etc.). The party can’t start until all helpers are done with their tasks.
 
 * You start with a countdown of 5.
 * As each helper finishes, they say "I'm done!" (which is like calling `countDown()`).
-* You, as the party organizer (main thread), keep waiting until you hear “all done!” (when the count reaches 0). Once that happens, you can start the party (continue your main job).
+* You, as the party organizer (main thread), keep waiting until you hear “all done!” (when the count reaches 0). Once
+  that happens, you can start the party (continue your main job).
 
 ### Real Example in Code:
 
@@ -83,18 +90,19 @@ class Worker extends Thread {
 
 ### Summary:
 
-* **CountdownLatch** helps the main thread wait for a certain number of tasks (like worker threads) to finish before proceeding.
+* **CountdownLatch** helps the main thread wait for a certain number of tasks (like worker threads) to finish before
+  proceeding.
 * Each worker tells the latch when it’s done, and when all workers are finished, the main thread can continue.
-
-
-
 
 =========================================================
 
+Yes, that's correct! If your `CountDownLatch` is initialized with a count of 5, it doesn't matter how many threads you
+have in total. The main thread will **only** be released when **5 threads** (or tasks) have finished and called
+`countDown()` to decrement the latch count to 0.
 
-Yes, that's correct! If your `CountDownLatch` is initialized with a count of 5, it doesn't matter how many threads you have in total. The main thread will **only** be released when **5 threads** (or tasks) have finished and called `countDown()` to decrement the latch count to 0.
-
-So, in your case, if you have 10 threads in total, the first 5 threads to call `countDown()` will cause the latch to reach 0, and once that happens, the main thread (or whichever thread is waiting on the latch) will be released and continue.
+So, in your case, if you have 10 threads in total, the first 5 threads to call `countDown()` will cause the latch to
+reach 0, and once that happens, the main thread (or whichever thread is waiting on the latch) will be released and
+continue.
 
 ### Here's what happens step-by-step:
 
@@ -102,7 +110,8 @@ So, in your case, if you have 10 threads in total, the first 5 threads to call `
 2. You start 10 threads.
 3. As each thread completes its task, it calls `countDown()` to reduce the count.
 4. The main thread (or any thread calling `await()`) will **wait** until the latch count reaches 0.
-5. Once the first 5 threads finish and reduce the latch count to 0, the main thread will be released and continue execution.
+5. Once the first 5 threads finish and reduce the latch count to 0, the main thread will be released and continue
+   execution.
 
 ### Important Points:
 
@@ -186,6 +195,7 @@ Worker 7 is working.
 In this case:
 
 * Even though there are 10 workers, the main thread only waits for the **first 5 workers** to finish.
-* Once 5 workers finish their tasks and decrement the latch to 0, the main thread proceeds with its execution, regardless of the remaining 5 workers still running.
+* Once 5 workers finish their tasks and decrement the latch to 0, the main thread proceeds with its execution,
+  regardless of the remaining 5 workers still running.
 
 I hope this clears it up! Feel free to ask more if you have any other questions.
