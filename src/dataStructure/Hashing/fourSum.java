@@ -28,7 +28,7 @@ public class fourSum {
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                mp.put(arr[i] + arr[j], new pair(j, j));
+                mp.put(arr[i] + arr[j], new pair(i, j));
             }
         }
 

@@ -1,10 +1,12 @@
-Absolutely! Let's go step-by-step through **transaction isolation levels in Spring Boot**, with **concrete examples** using a **banking scenario** (e.g., reading and updating account balances).
+Absolutely! Let's go step-by-step through **transaction isolation levels in Spring Boot**, with **concrete examples**
+using a **banking scenario** (e.g., reading and updating account balances).
 
 ---
 
 ## 🔑 Core Concept Recap
 
-Transaction **isolation levels** control how transactions interact with each other when running **concurrently**. The goal is to prevent problems like:
+Transaction **isolation levels** control how transactions interact with each other when running **concurrently**. The
+goal is to prevent problems like:
 
 * **Dirty Read** – Reading uncommitted data from another transaction.
 * **Non-Repeatable Read** – Getting different results for the same query within a transaction.
@@ -15,9 +17,10 @@ Transaction **isolation levels** control how transactions interact with each oth
 ## 💡 Example Scenario: Bank Account Table
 
 ```sql
-CREATE TABLE account (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR(100),
+CREATE TABLE account
+(
+    id      BIGINT PRIMARY KEY,
+    name    VARCHAR(100),
     balance DECIMAL
 );
 ```
@@ -25,7 +28,7 @@ CREATE TABLE account (
 Assume this record exists:
 
 | id | name  | balance |
-| -- | ----- | ------- |
+|----|-------|---------|
 | 1  | Alice | 1000    |
 
 ---
@@ -33,6 +36,7 @@ Assume this record exists:
 ## 1. `READ_UNCOMMITTED`: Allows Dirty Reads
 
 ```java
+
 @Transactional(isolation = Isolation.READ_UNCOMMITTED)
 public Account getAccount(Long id) {
     return accountRepository.findById(id).orElseThrow();
@@ -50,6 +54,7 @@ public Account getAccount(Long id) {
 ## 2. `READ_COMMITTED`: Prevents Dirty Reads
 
 ```java
+
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public BigDecimal getBalance(Long id) {
     return accountRepository.findById(id).get().getBalance();
@@ -70,6 +75,7 @@ public BigDecimal getBalance(Long id) {
 ## 3. `REPEATABLE_READ`: Prevents Dirty and Non-Repeatable Reads
 
 ```java
+
 @Transactional(isolation = Isolation.REPEATABLE_READ)
 public void transfer(Long fromId, Long toId, BigDecimal amount) {
     Account from = accountRepository.findById(fromId).get(); // First read
@@ -88,6 +94,7 @@ public void transfer(Long fromId, Long toId, BigDecimal amount) {
 ## 4. `SERIALIZABLE`: Fully Isolated
 
 ```java
+
 @Transactional(isolation = Isolation.SERIALIZABLE)
 public List<Account> getHighValueAccounts() {
     return accountRepository.findByBalanceGreaterThan(500);
@@ -105,7 +112,7 @@ public List<Account> getHighValueAccounts() {
 ## 🔁 Comparing Results
 
 | Isolation Level    | Dirty Reads | Non-repeatable Reads | Phantom Reads |
-| ------------------ | ----------- | -------------------- | ------------- |
+|--------------------|-------------|----------------------|---------------|
 | `READ_UNCOMMITTED` | ✅           | ✅                    | ✅             |
 | `READ_COMMITTED`   | ❌           | ✅                    | ✅             |
 | `REPEATABLE_READ`  | ❌           | ❌                    | ✅             |

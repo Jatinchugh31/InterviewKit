@@ -69,6 +69,11 @@ public class UpdateHashSet {
         st1.id = 3;
 
         System.out.println(studentList.size());
+         //as the student class is not immutatble class it is not a good practice to make a class as a key.
+        studentList.add(st1);
+        System.out.println(studentList.size());
+        studentList.remove(st1);
+        System.out.println(studentList.size());
 
     }
 

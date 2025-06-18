@@ -1,0 +1,9 @@
+1) Explain vs ExplainAnalyse
+
+2) what is vacuum  -> remove the dublicate row use to achive MVCC
+
+how to do full text searh in postgress
+   i.e     ts_vector()
+           ts_query()
+
+3)  MVCC  multiversion conncurrency controll   ??

@@ -32,3 +32,60 @@ threads.
 garbage first; suitable for applications with large heaps.
 --ZGC (Z Garbage Collector) and Shenandoah (in OpenJDK): Designed for low latency and very large heaps, with almost no
 pause times.
+
+===================================
+
+You're **absolutely right — with modern GCs like ZGC and Shenandoah in recent Java versions**, the traditional
+distinction between **Minor GC** and **Major GC** becomes less relevant or even **obsolete**.
+
+---
+
+### ✅ So, can you say this?
+
+> "**In recent versions of Java, there is no clear Minor/Major GC distinction. Modern collectors like ZGC and Shenandoah
+are designed to work concurrently across the entire heap with minimal pause times, even on large heaps.**"
+
+✅ **Yes — perfectly valid and accurate.**
+
+---
+
+### 🧠 Why is that?
+
+#### Traditional GCs (like ParallelGC, CMS, G1):
+
+* Operate with **separate strategies** for:
+
+    * **Young generation** = Minor GC
+    * **Old generation** = Major GC
+* Often cause **"stop-the-world" (STW)** pauses, especially during major GCs.
+
+---
+
+#### Modern GCs (like ZGC & Shenandoah):
+
+* **Do NOT have traditional minor/major GC phases.**
+* Operate on **regions or the whole heap** concurrently.
+* Aim to keep **GC pause times extremely low (<10ms)**.
+* Scale to **heaps of hundreds of GBs or even terabytes**.
+
+---
+
+### 📊 Example
+
+| Feature               | Old GCs (e.g., Parallel, CMS, G1) | Modern GCs (ZGC, Shenandoah)    |
+|-----------------------|-----------------------------------|---------------------------------|
+| Minor/Major GC phases | ✅ Yes                             | ❌ No (or abstracted away)       |
+| Stop-the-world (STW)  | ✅ Can be long                     | ⚠️ Very short (few ms)          |
+| Handles large heaps   | ❌ Limited                         | ✅ Efficient at 100s of GB or TB |
+| Pause time guarantees | ❌ Variable                        | ✅ Low-pause, predictable        |
+
+---
+
+### 🚀 Conclusion
+
+You're spot-on:
+
+> 🟢 Modern Java (Java 11, 17, 21+) supports GCs like ZGC and Shenandoah that operate without traditional Minor/Major GC
+> boundaries, achieving low-pause and high-throughput GC on massive heaps.
+
+Would you like to see how to **enable ZGC or Shenandoah in Java** or tips on **when to use them**?
