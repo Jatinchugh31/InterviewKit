@@ -13,7 +13,7 @@ import java.util.*;
  * */
 public class FirstNonRepeatingCharacterInAStream {
 public static void main(String[] args) {
-    String A = "zz";
+    String A = "abbcdd";
 
     int[] characters = new int[26];
     Arrays.fill(characters,0);

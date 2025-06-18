@@ -4,51 +4,33 @@ package src.test;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Test {
 
 
     public static void main(String[] args) {
-       int arr[] ={2,4,6,7,1,1,1,1,1,1};
-       int target = 6;
 
-       // way1   sliding window
-        int low=0;
-        int high = 0;
-        int sum=0;
-        int result=0;
-        while(high < arr.length){
-            sum = sum + arr[high];
+        int arr[] = {1,1,2,3};
 
-            while(sum > target && low < high){
-                sum = sum - arr[low];
-                low++;
+        int x=1;
+        int low =0;
+        int high=arr.length-1;
+        int res=-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(arr[mid]==x){
+                res=mid;
+                high--;
+            }else if(arr[mid]<x){
+                low=mid+1;
+            }else {
+                high=mid-1;
             }
-            if(sum == target){
-                result = Math.max(result,high-low+1);
-                System.out.println("pair found"+result);
-            }
-            high++;
         }
+        System.out.println(res);
 
-        Map<Integer,Integer>  prefixSum =new HashMap<>();
-          sum=0;
-          result=0;
-        for(int i=0;i<arr.length;i++){
-              sum = sum + arr[i];
-              if(sum == target){
-                  result = Math.max(result,i+1);
-              }
-
-              if(prefixSum.containsKey(sum-target)){
-                  result = Math.max(result,i - prefixSum.get(sum-target));
-
-              }
-              prefixSum.put(sum,i);
-        }
-        System.out.println(result);
     }
-
-
 
 
 }

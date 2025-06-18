@@ -6,9 +6,12 @@ second round with product head of development
 disclamer _-_ no java question 
 frist two   questions are  find max subsequent array . 
 i,4,5,0,7,8,9 
-so answer is 7, 8 9 
+so answer is 7, 8 9   -> in this we can make set and store elemt  if i-1 is not present in set then that is starting point 
+                        // check for i+1  that means  subsecuent array 
+                        // 6 is not in set so starting is 7  , 7+1  =8 present 8+1 9 present , 9+1 =10 not present so 
+                        //so  that 
 
-second question ->  array 1,2,3,4,-2,5 
+second question ->  array 1,2,3,4,-2,5   // this kadne algoritham
 find maxsubArray sum  
 
 third question 

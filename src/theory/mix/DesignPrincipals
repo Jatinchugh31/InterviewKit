@@ -1,0 +1,80 @@
+Absolutely! **Design principles** are foundational guidelines that help you write clean, maintainable, and scalable code. Here are some of the most important and widely recognized ones:
+
+---
+
+## **Key Design Principles (with Simple Explanations)**
+
+### 1. **Single Responsibility Principle (SRP)**
+
+* **Each class or method should have only one reason to change.**
+* Example: Don’t mix database logic and UI logic in the same class.
+
+### 2. **Open/Closed Principle**
+
+* **Software entities (classes, modules, functions) should be open for extension but closed for modification.**
+* You should be able to add new behavior without modifying existing code (e.g., using inheritance or interfaces).
+
+### 3. **Liskov Substitution Principle**
+
+* **Subtypes must be substitutable for their base types.**
+* If class B is a subclass of A, you should be able to use B wherever you use A, without unexpected results.
+
+### 4. **Interface Segregation Principle**
+
+* **Clients should not be forced to depend on interfaces they don’t use.**
+* Split large interfaces into smaller, specific ones.
+
+### 5. **Dependency Inversion Principle**
+
+* **Depend on abstractions, not concrete implementations.**
+* Use interfaces or abstract classes so your code is less tightly coupled.
+
+> These five principles together are often remembered as the **SOLID principles**.
+
+---
+
+### 6. **DRY (Don’t Repeat Yourself)**
+
+* **Avoid duplicating code or logic.**
+* Reuse code via methods, classes, or modules.
+
+### 7. **KISS (Keep It Simple, Stupid)**
+
+* **Simplicity beats complexity.**
+* Don’t over-engineer solutions; keep your code as simple as possible.
+
+### 8. **YAGNI (You Ain’t Gonna Need It)**
+
+* **Don’t implement something until it is necessary.**
+* Avoid adding features just because you think you might need them later.
+
+### 9. **Law of Demeter (Principle of Least Knowledge)**
+
+* **A module should not know about the inner details of the objects it interacts with.**
+* "Talk to friends, not to strangers."
+
+### 10. **Composition Over Inheritance**
+
+* **Favor composing objects with simple functionalities over inheriting from base classes.**
+* Promotes flexibility and code reuse.
+
+---
+
+## **Summary Table**
+
+| Principle                    | Core Idea                                   |
+| ---------------------------- | ------------------------------------------- |
+| SRP                          | One responsibility per class/module         |
+| Open/Closed                  | Open for extension, closed for modification |
+| Liskov Substitution          | Subtypes replace parent types seamlessly    |
+| Interface Segregation        | No fat interfaces, only what is needed      |
+| Dependency Inversion         | Depend on abstractions, not concretes       |
+| DRY                          | No code duplication                         |
+| KISS                         | Keep code simple                            |
+| YAGNI                        | Don’t code what you don’t need              |
+| Law of Demeter               | Low coupling; talk to friends only          |
+| Composition over Inheritance | Prefer composition to deep inheritance      |
+
+---
+
+If you want real-world examples for any of these, or want them focused on a specific language (Java, Python, etc.), just ask!

@@ -40,6 +40,9 @@ Certainly! You’ve outlined some key networking protocols that are commonly use
     * **Advantages**: Provides control over media playback.
     * **Disadvantages**: More complex, does not directly handle media delivery (requires RTP for actual media transport).
 
+///  DASH Dynamic Adaptive Streaming over HTTP
+
+
 ### 6. **QUIC (Quick UDP Internet Connections)**
 
 * **Use Case**: Modern web browsing, video streaming, and real-time applications (Google uses QUIC in services like YouTube and Gmail).
